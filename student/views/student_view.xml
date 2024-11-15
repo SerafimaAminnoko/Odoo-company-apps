@@ -1,0 +1,86 @@
+<odoo>
+
+
+  <record id="wb_student_tree_view" model="ir.ui.view">
+    <field name="name">wb.student.tree.view</field>
+    <field name="model">wb.student</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="id"/>
+        <field name="school_id"/>
+        <field name="roll_number"/>
+        <field name="name"/>
+        <field name="name1"/>
+        <field name="student_fees"/>
+        <field name="discount_fees"/>
+        <field name="final_fees"/>
+
+      </tree>
+    </field>
+
+  </record>
+
+  <record id="wb_student_form_view" model="ir.ui.view">
+    <field name="name">wb.student.form.view</field>
+    <field name="model">wb.student</field>
+    <field name="arch" type="xml">
+      <form string="Student">
+        <header>
+          <button name="custom_method" type="object" string="Custom Method"/>
+          <button name="duplicate_records" type="object" string="Duplicate Records"/>
+          <button name="delete_records" type="object" string="Delete Records"/>
+        </header>
+        <group>
+          <group>
+            <field name="hobby_list" string="Select Hobbies" widget="many2many_tags"/>
+            <field name="school_id" string="Select School"/>
+            <field name="joining_date" />
+            <field name="student_fees" placeholder="You can enter here current year fees"/>
+            <field name="roll_number"/>
+            <field name="gender"/>
+            <field name="advance_gender"/>
+            <field name="name"/>
+            <field name="is_paid"/>
+            <field name="student_fees"/>
+            <field name="discount_fees"/>
+            <field name="final_fees"/>
+            <field name="name2"/>
+            <field name="student_name" string="STD NM" required="1"/>
+            <field name="address" placeholder="Enter student address..."/>
+          </group>
+          <group>
+            <button name="json_data_store" type="object" string="JSON FEED"/>
+            <field name="address_html" options="{'sandboxedPreview':true}"/>
+          </group>
+        </group>
+
+      </form>
+    </field>
+  </record>
+
+  <record id="wb_student_action" model="ir.actions.act_window">
+    <field name="name">Student</field>
+    <field name="res_model">wb.student</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+
+<!--  Student -> -->
+<!--          Weblearns -> -->
+<!--             Student List -->
+
+  <menuitem id="wb_student_root_menu"
+            name="Student"
+  />
+
+ <menuitem id="wb_student_sub_root_menu"
+            name="Weblearns"
+            parent="wb_student_root_menu"
+  />
+
+  <menuitem id="wb_student_list_menu"
+            action="wb_student_action"
+            name="Student List"
+            parent="wb_student_sub_root_menu"
+            />
+</odoo>

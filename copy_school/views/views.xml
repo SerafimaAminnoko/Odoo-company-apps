@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="copy_school.list">
+      <field name="name">copy_school list</field>
+      <field name="model">copy_school.copy_school</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="copy_school.action_window">
+      <field name="name">copy_school window</field>
+      <field name="res_model">copy_school.copy_school</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="copy_school.action_server">
+      <field name="name">copy_school server</field>
+      <field name="model_id" ref="model_copy_school_copy_school"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="copy_school" id="copy_school.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="copy_school.menu_1" parent="copy_school.menu_root"/>
+    <menuitem name="Menu 2" id="copy_school.menu_2" parent="copy_school.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="copy_school.menu_1_list" parent="copy_school.menu_1"
+              action="copy_school.action_window"/>
+    <menuitem name="Server to list" id="copy_school" parent="copy_school.menu_2"
+              action="copy_school.action_server"/>
+-->
+  </data>
+</odoo>
