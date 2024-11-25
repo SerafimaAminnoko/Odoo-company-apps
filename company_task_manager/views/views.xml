@@ -1,60 +1,105 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="company_task_manager.list">
-      <field name="name">company_task_manager list</field>
-      <field name="model">company_task_manager.company_task_manager</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
--->
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="company_task_manager.action_window">
-      <field name="name">company_task_manager window</field>
-      <field name="res_model">company_task_manager.company_task_manager</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
+        <record model="ir.actions.act_window" id="company_task_manager_action">
+            <field name="name">Tasks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tasks</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <menuitem id="company_task_manager_root_menu"
+                  name="CompanyTaskManager"
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="company_task_manager.action_server">
-      <field name="name">company_task_manager server</field>
-      <field name="model_id" ref="model_company_task_manager_company_task_manager"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
+                  />
+        <menuitem name="CTM"
+                  id="ctm_root_menu"
+                  parent="company_task_manager_root_menu"
+                  />
+        <menuitem name="Tasks"
+                  id="tasks_root_menu"
+                  parent="ctm_root_menu"
+                  action="company_task_manager_action"
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="company_task_manager" id="company_task_manager.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="company_task_manager.menu_1" parent="company_task_manager.menu_root"/>
-    <menuitem name="Menu 2" id="company_task_manager.menu_2" parent="company_task_manager.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="company_task_manager.menu_1_list" parent="company_task_manager.menu_1"
-              action="company_task_manager.action_window"/>
-    <menuitem name="Server to list" id="company_task_manager" parent="company_task_manager.menu_2"
-              action="company_task_manager.action_server"/>
--->
-  </data>
+        />
+
+
+        <record id="tasks_kanban_view" model="ir.ui.view">
+            <field name="name">tasks.kanban.view</field>
+            <field name="model">tasks</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="title"/>
+                    <field name="id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <span t-esc="record.title.raw_value"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="tasks_tree_view" model="ir.ui.view">
+            <field name="name">tasks.tree.view</field>
+            <field name="model">tasks</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="title"/>
+                    <field name="id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tasks_form_view" model="ir.ui.view">
+            <field name="name">tasks.form</field>
+            <field name="model">tasks</field>
+            <field name="arch" type="xml">
+                <form string="Test">
+                    <sheet>
+                        <group>
+                            <field name="title"/>
+                        </group>
+                        <group>
+                            <field name="time_create"/>
+                            <field name="status"/>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <group>
+                                    <field name="description"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tasks_search_view" model="ir.ui.view">
+            <field name="name">tasks.search</field>
+            <field name="model">tasks</field>
+            <field name="arch" type="xml">
+                <search string="Tests">
+                    <field name="title"/>
+                    <field name="time_create"/>
+                    <separator/>
+                    <filter string="Task pending"
+                            name="status"
+                            domain="[('status', '=', 'pending')]"/>
+                    <filter string="Task in process"
+                            name="status"
+                            domain="[('status', '=', 'in process')]"/>
+                    <group string="1"
+                           name="Group By">
+                        <filter string="time_create"
+                                name="time_create"
+                                context="{'group_by': 'time_create',
+                                          'residual_visible': True}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
 </odoo>

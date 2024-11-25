@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_company_task_manager_company_task_manager,company_task_manager.company_task_manager,model_company_task_manager_company_task_manager,base.group_user,1,1,1,1
+access_tasks,tasks,model_tasks,base.group_user,1,1,1,1
+access_employees,employees,model_employees,base.group_user,1,1,1,1
+
