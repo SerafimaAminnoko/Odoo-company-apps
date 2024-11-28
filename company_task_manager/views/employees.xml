@@ -1,0 +1,18 @@
+<odoo>
+    <record model="ir.actions.act_window" id="employees_action">
+        <field name="name">Employees</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employees</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="employees_root_menu"
+              name="Employees"
+              parent="company_task_manager_root_menu"
+    />
+    <menuitem id="employees"
+              parent="employees_root_menu"
+              name="All Employees"
+              action="employees_action"
+    />
+</odoo>

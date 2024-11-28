@@ -26,13 +26,17 @@
             <field name="name">tasks.kanban.view</field>
             <field name="model">tasks</field>
             <field name="arch" type="xml">
-                <kanban>
-                    <field name="title"/>
-                    <field name="id"/>
+                <kanban quick_create="false" default_group_by="status">
+
+                    <field name="status"/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_card">
-                                <span t-esc="record.title.raw_value"/>
+                            <div class="oe_kanban_global_click">
+                                <h6><field name="title"/></h6>
+
+                                <div t-if="record.status.raw_value == 'pending'">
+                                    This is new.
+                                </div>
                             </div>
                         </t>
                     </templates>
@@ -56,20 +60,22 @@
             <field name="name">tasks.form</field>
             <field name="model">tasks</field>
             <field name="arch" type="xml">
-                <form string="Test">
+                <form string="Test" create="false">
                     <sheet>
                         <group>
                             <field name="title"/>
-                        </group>
-                        <group>
+
                             <field name="time_create"/>
                             <field name="status"/>
                         </group>
                         <notebook>
                             <page string="Description">
                                 <group>
+                                    <field name="short_description"/>
                                     <field name="description"/>
+                                    <field name="employee_id"/>
                                 </group>
+
                             </page>
                         </notebook>
                     </sheet>

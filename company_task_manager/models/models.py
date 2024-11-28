@@ -19,16 +19,6 @@ from odoo import models, fields, api
 #             float(record.value) / 100
 
 
-class GlobalTasks(models.Model):
-    _name = 'company_task_manager.global_tasks'
-    _description = 'company_task_manager.global_tasks'
-
-    name = fields.Char()
-    description = fields.Text()
-    data_add = fields.Datetime()
-    data_closed = fields.Datetime()
-
-
 class Employee(models.Model):
     _name = 'employees'
     _description = 'employees'
@@ -42,10 +32,19 @@ class Tasks(models.Model):
     _description = 'tasks'
 
     title = fields.Char()
-    description = fields.Text()
+    short_description = fields.Text()
+    description = fields.Html()
     time_create = fields.Datetime(default=fields.Datetime.now)
-    employee_id = fields.Many2one("employees", string="Partner")
+    employee_id = fields.Many2one("employees", string="Assigned to")
     status = fields.Selection(
         [('pending', 'Pending'), ('in process', 'In Process'),
-         ('completed', 'Completed'), ('canceled', 'Canceled')]
+         ('completed', 'Completed'), ('canceled', 'Canceled')],
+        group_expand='_group_status',
+        track_visibility='always'
     )
+
+    def _create_task(self):
+        pass
+
+    def _group_status(self, status, domain, order):
+        return [key for key, val in type(self).status.selection]
