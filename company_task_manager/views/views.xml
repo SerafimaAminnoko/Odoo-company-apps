@@ -34,9 +34,13 @@
                             <div class="oe_kanban_global_click">
                                 <h6><field name="title"/></h6>
 
-                                <div t-if="record.status.raw_value == 'pending'">
-                                    This is new.
-                                </div>
+                                <div t-if="record.type.raw_value == 'global'"><font color="brown"><field name="type"/></font></div>
+                                <div t-elif="record.type.raw_value == 'frontend'"><font color="green"><field name="type"/></font></div>
+                                <div t-elif="record.type.raw_value == 'backend'"><font color="blue"><field name="type"/></font></div>
+                                <div t-elif="record.type.raw_value == 'design'"><font color="gold"><field name="type"/></font></div>
+                                <div t-elif="record.type.raw_value == 'clientscompanies'"><font color="orange"><field name="type"/></font></div>
+                                <div t-elif="record.type.raw_value == 'smm'"><font color="pink"><field name="type"/></font></div>
+
                             </div>
                         </t>
                     </templates>
@@ -52,6 +56,9 @@
                 <tree>
                     <field name="title"/>
                     <field name="id"/>
+                    <field name="type"/>
+                    <field name="employee_id"/>
+
                 </tree>
             </field>
         </record>
@@ -66,16 +73,22 @@
                             <field name="title"/>
 
                             <field name="time_create"/>
-                            <field name="status"/>
+
                         </group>
                         <notebook>
                             <page string="Description">
                                 <group>
                                     <field name="short_description"/>
                                     <field name="description"/>
-                                    <field name="employee_id"/>
+                                    <field name="status"/>
                                 </group>
 
+                            </page>
+                            <page string="Additionally">
+                                <group>
+                                    <field name="type"/>
+                                    <field name="employee_id"/>
+                                </group>
                             </page>
                         </notebook>
                     </sheet>
@@ -91,12 +104,25 @@
                     <field name="title"/>
                     <field name="time_create"/>
                     <separator/>
-                    <filter string="Task pending"
+                    <filter string="Global"
                             name="status"
-                            domain="[('status', '=', 'pending')]"/>
-                    <filter string="Task in process"
+                            domain="[('type', '=', 'global')]"/>
+                    <filter string="Frontend"
                             name="status"
-                            domain="[('status', '=', 'in process')]"/>
+                            domain="[('type', '=', 'frontend')]"/>
+                    <filter string="Backend"
+                            name="status"
+                            domain="[('type', '=', 'backend')]"/>
+                    <filter string="Design"
+                            name="status"
+                            domain="[('type', '=', 'design')]"/>
+                    <filter string="Clients&amp;Companies"
+                            name="status"
+                            domain="[('type', '=', 'clientscompanies')]"/>
+                    <filter string="SMM"
+                            name="status"
+                            domain="[('type', '=', 'smm')]"/>
+
                     <group string="1"
                            name="Group By">
                         <filter string="time_create"

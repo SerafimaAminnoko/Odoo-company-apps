@@ -26,6 +26,7 @@
     <field name="arch" type="xml">
       <form string="Student">
         <header>
+          <button name="send_email_template" type="object" string="Send Mail"/>
           <button name="custom_method" type="object" string="Custom Method"/>
           <button name="duplicate_records" type="object" string="Duplicate Records"/>
           <button name="delete_records" type="object" string="Delete Records"/>
@@ -45,6 +46,7 @@
             <field name="discount_fees"/>
             <field name="final_fees"/>
             <field name="name2"/>
+            <field name="image" widget="image"/>
             <field name="student_name" string="STD NM" required="1"/>
             <field name="address" placeholder="Enter student address..."/>
           </group>

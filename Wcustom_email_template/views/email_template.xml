@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record model="mail.template" id="Wstudent_email_template">
+        <field name="name">Custom Email Template</field>
+        <field name="model_id" ref="student.model_wb_student"/>
+        <field name="email_from">{{ object.create_uid.email_formatted or '' }}</field>
+        <field name="email_to">{{ object.school_id.name or '' }}</field>
+        <field name="subject">Student Notification2</field>
+
+        <field name="body_html" type="html">
+            <div class="text-center">
+                <p>Dear <span t-field="object.name"/></p>
+                <img t-attf-src="data:image/*;base64,{{object.image}}" y-att-alt="object.name"  style="width:200px;height:200px;object-fit:cover;"/>
+            </div>
+
+
+            <t t-set="a" t-value="100" />
+            <span t-out="a"/>
+
+            <t t-set="abc" t-value="object" />
+            <span t-out="abc.return_string_from_backend_to_emailtemplate()" />
+
+
+            <t t-if="object.name2">
+                <p>Student Second Name <span t-field="object.name2"/></p>
+            </t>
+            <t t-else="">
+                <p>Student Second Name is not available.</p>
+            </t>
+
+            <t t-foreach="object.hobby_list" t-as="hobby">
+                    <span t-out="hobby_index"/> : - <span t-out="hobby.name"/><br/>
+            </t>
+
+            <p>School name is <span t-out="object.school_id.name"/></p>
+            <p>Joining Date <span t-field="object.joining_date" /></p>
+            <p>I sent</p>
+            <p>an XML</p>
+
+        </field>
+    </record>
+</odoo>

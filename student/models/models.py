@@ -10,7 +10,6 @@ class School(models.Model):
     invoice_id = fields.Many2one("account.move")
     invoice_user_id = fields.Many2one("res.users")
     invoice_date = fields.Date(related="invoice_id.invoice_date", store=True)
-
     name = fields.Char("Name")
     school_list = fields.One2many('wb.student', 'school_id')
     ref_field_id = fields.Reference([
@@ -42,21 +41,25 @@ class School(models.Model):
         return rtn
 
     def custom_method(self):
-        print("Custom method clicked!")
-        print(self)
+#        print("Custom method clicked!")
+#        print(self)
 #        self.name = "Single Update"
 #        self.amount = 50
 #        self.write({"name": "Write", "amount": 40})
 
-        records = self.search([], limit=5)
+        records = self.search([("amount", "=", 40)])
         print(records)
+#        print(records)
 
 #        records.write({"name": "mass editing name", "amount": 1000})
 
-        for rec in records:
-            rec.write({"name": f"{rec.id}", "amount": 40})
+#        for rec in records:
+#            rec.write({"name": f"{rec.id}", "amount": 40})
 
-        pass
+        # select * from school where amount = 100;
+#        records = self.search([("amount", "=", 40)])
+    #    self.print_table(records)
+
 
     def write(self, vals):
         print("Write method called!")
@@ -108,14 +111,22 @@ class Student(models.Model):
     student_name = fields.Char(index=True, size=5)
     address = fields.Text('Address', help='Enter here student address')
     address_html = fields.Html("Address Html")
+    image = fields.Image(string='Image')
 
     final_fees = fields.Float("Final Fees", compute="_compute_final_fees_call", store=True)
+
+
+    def send_email_template(self):
+        self.env.ref("Wcustom_email_template.Wstudent_email_template").send_mail(self.id, force_send=True)
+
+
+
+    def return_string_from_backend_to_emailtemplate(self):
+        return "Weblearns"
 
     def _compute_final_fees_call(self):
         for record in self:
             record.final_fees = record.student_fees - record.discount_fees
-
-
 
     def json_data_store(self):
         self.school_data = {"name": self.name,

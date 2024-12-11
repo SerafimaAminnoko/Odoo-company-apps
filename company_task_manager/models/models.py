@@ -42,6 +42,12 @@ class Tasks(models.Model):
         group_expand='_group_status',
         track_visibility='always'
     )
+    type = fields.Selection(
+        [('global', 'Global'), ('frontend', 'Frontend'),
+         ('backend', 'Backend'), ('design', 'Design'),
+         ('clientscompanies', 'Clients&Companies'), ('smm', 'SMM'),
+         ],
+    )
 
     def _create_task(self):
         pass

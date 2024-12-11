@@ -25,7 +25,8 @@ Long description of module's purpose
         'security/ir.model.access.csv',
         'views/hobby_view.xml',
         'views/student_view.xml',
-        'views/school_view.xml'
+        'views/school_view.xml',
+        'views/email_template.xml',
 
     ],
     # only loaded in demonstration mode

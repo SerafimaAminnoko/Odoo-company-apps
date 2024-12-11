@@ -11,6 +11,15 @@
         </field>
     </record>
 
+    <record id="student_calendar_view" model="ir.ui.view">
+        <field name="name">wb.student.calendar.view</field>
+        <field name="model">wb.student</field>
+        <field name="arch" type="xml">
+            <calendar date_start="create_date">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
     <record id="wb_hobby_form_view" model="ir.ui.view">
         <field name="name">wb.hobby.form.view</field>
         <field name="model">wb.hobby</field>
