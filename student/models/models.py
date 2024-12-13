@@ -113,7 +113,8 @@ class Student(models.Model):
     address_html = fields.Html("Address Html")
     image = fields.Image(string='Image')
 
-    final_fees = fields.Float("Final Fees", compute="_compute_final_fees_call", store=True)
+    final_fees = fields.Float("Final Fees", compute="_compute_final_fees_call")
+    total_fees = fields.Float()
 
 
     def send_email_template(self):
@@ -127,6 +128,7 @@ class Student(models.Model):
     def _compute_final_fees_call(self):
         for record in self:
             record.final_fees = record.student_fees - record.discount_fees
+
 
     def json_data_store(self):
         self.school_data = {"name": self.name,
@@ -147,4 +149,4 @@ class Hobby(models.Model):
     _description = 'This is a hobby profile'
 
     name = fields.Char("Name")
-
+    date = fields.Datetime(default=fields.Datetime.now)
