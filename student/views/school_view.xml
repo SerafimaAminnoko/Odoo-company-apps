@@ -25,6 +25,9 @@
                 <group>
                     <group>
                         <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="school_type"/>
                         <field name="invoice_id"/>
                         <field name="invoice_user_id"/>
                         <field name="school_list" string="Student List"/>

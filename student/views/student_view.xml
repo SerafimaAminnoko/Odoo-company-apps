@@ -5,7 +5,7 @@
     <field name="name">wb.student.tree.view</field>
     <field name="model">wb.student</field>
     <field name="arch" type="xml">
-      <tree>
+      <tree default_order="id">
         <field name="id"/>
         <field name="school_id"/>
         <field name="roll_number"/>
@@ -97,6 +97,15 @@
       </pivot>
     </field>
   </record>
+
+<!--  <record id="student_cohort_view" model="ir.ui.view">
+    <field name="name">wb.student.view.cohort</field>
+    <field name="model">wb.student</field>
+    <field name="arch" type="xml">
+      <cohort date_start="date"
+             interval="day" string="Student"/>
+    </field>
+  </record> -->
 
   <record id="wb_student_action" model="ir.actions.act_window">
     <field name="name">Student</field>

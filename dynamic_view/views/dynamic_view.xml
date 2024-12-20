@@ -1,0 +1,57 @@
+<odoo>
+    <record id="action_school_profile" model="ir.actions.act_window">
+        <field name="name">Dynamic Student View</field>
+        <field name="res_model">dynamic</field>
+        <field name="view_mode">tree,pivot,graph,form</field>
+    </record>
+
+    <record id="Some" model="ir.ui.view">
+        <field name="name">dynamic.list.view</field>
+        <field name="model">dynamic</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="school_name"/>
+                <field name="school_phone"/>
+                <field name="school_email"/>
+                <field name="school_type"/>
+
+                <field name="student_name"/>
+
+                <field name="student_rno"/>
+                <field name="student_fees"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="student_dynamic_graph_view" model="ir.ui.view">
+        <field name="name">dynamic.graph.view</field>
+        <field name="model">dynamic</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="school_name"/>
+                <field name="student_fees"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="dynamic_pivot_view" model="ir.ui.view">
+        <field name="name">dynamic.pivot.view</field>
+        <field name="model">dynamic</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="student_fees" type="measure"/>
+                <field name="school_name" type="col"/>
+                <field name="student_name" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <menuitem id="student_root_menu" name="School"/>
+    <menuitem id="student_sub_menu" parent="student_root_menu" name="SchoolDynamic"/>
+    <menuitem id="student_profile_menu" parent="student_sub_menu"
+              name="SchoolStudentDynamic" action="action_school_profile"
+    />
+
+
+
+</odoo>

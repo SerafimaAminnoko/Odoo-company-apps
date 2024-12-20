@@ -17,7 +17,12 @@ class School(models.Model):
         ("wb.student", 'Student'),
         ("wb.hobby", 'Hobby'),
     ])
-
+    email = fields.Char(string='Email', copy=False)
+    phone = fields.Char('Phone', copy=False)
+    school_type = fields.Selection([
+        ('public', 'Public'),
+        ('private', 'Private'),
+    ], string='Type of School')
     binary_field = fields.Binary("Binary Field")
     binary_file_name = fields.Char("Binary File Name")
     binary_fields = fields.Many2many("ir.attachment")
@@ -94,6 +99,7 @@ class Student(models.Model):
     hobby_list = fields.Many2many("wb.hobby", "student_hobby_list_relation", "student_id", "hobby_id")
     school_id = fields.Many2one(comodel_name="wb.school", help='Please choose your school')
     joining_date = fields.Datetime(default=fields.Datetime.now)
+    date = fields.Date(required=True)
     school_data = fields.Json()
     student_fees = fields.Float(digits=(4, 2), default=6.9, required=True)
     discount_fees = fields.Float(digits=(4, 2), default=3.2, required=True)
